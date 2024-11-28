@@ -1,17 +1,27 @@
 "use client";
+import categories from "@/libs/data/categories.json";
 import recipes from "@/libs/data/recipes.json";
 import Image from "next/image";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 export default function Recipe() {
+  const { recipe } = useParams();
+
+  const categoryData = categories.find((item) => item?.name === recipe);
+
+  const categoriesRecipes = categoryData
+    ? recipes.filter((item) => item?.category_id === categoryData?.id)
+    : [];
+
   return (
     <main className="container mx-auto px-4 py-8 mt-[100px]">
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-4xl font-bold mb-2">
-            {"All Recipes"}
+            {categoryData?.name || "All Recipes"}
             <span className="text-gray-500 text-2xl font-normal">
-              ({recipes?.length} Recipes)
+              ({categoriesRecipes?.length} Recipes)
             </span>
           </h1>
           <p className="text-gray-600">
@@ -22,9 +32,9 @@ export default function Recipe() {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {recipes?.map((recipe, index) => (
+        {categoriesRecipes?.map((recipe, index) => (
           <Link
-            href={`/recipes/${recipe.title}`}
+            href={`/${categoryData?.name}/${recipe.title}`}
             className="bg-white rounded-lg overflow-hidden shadow-md"
             key={index}
           >
