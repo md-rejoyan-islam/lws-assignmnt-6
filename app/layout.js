@@ -1,3 +1,5 @@
+import Footer from "@/components/shared/footer";
+import Header from "@/components/shared/header";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -21,9 +23,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white`}
       >
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
