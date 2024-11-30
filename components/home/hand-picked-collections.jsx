@@ -1,9 +1,18 @@
+import categories from "@/libs/data/categories.json";
 import recipes from "@/libs/data/recipes.json";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function HandPickedCollections() {
-  const random2Recipes = recipes.sort(() => 0.5 - Math.random()).slice(0, 2);
+  const random2Recipes = recipes
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 2)
+    ?.map((recipe) => ({
+      ...recipe,
+      categoryName: categories?.find(
+        (category) => category.id === recipe?.category_id
+      )?.name,
+    }));
 
   return (
     <section className="mb-16">
@@ -12,7 +21,8 @@ export default function HandPickedCollections() {
       </h2>
       <div className="grid md:grid-cols-2 gap-8">
         {random2Recipes.map((recipe, index) => (
-          <div
+          <Link
+            href={`/${recipe?.categoryName}/${recipe?.title}`}
             className="relative group overflow-hidden rounded-lg transition-transform duration-300 ease-in-out transform cursor-pointer"
             key={index}
           >
@@ -32,7 +42,7 @@ export default function HandPickedCollections() {
                 View Collection
               </Link>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

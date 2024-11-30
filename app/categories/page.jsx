@@ -10,7 +10,7 @@ export default function Categories() {
       <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
         {categories?.map((category, index) => (
           <Link
-            href={`/recipes/${category.name}`}
+            href={`categories/${category.name}`}
             className="text-center"
             key={index}
           >

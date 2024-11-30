@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <header className="container mx-auto px-4 py-4 shadow-lg fixed top-0 bg-white z-50">
       <nav className="flex justify-between items-center">
-        <a href="/index.html" className="text-3xl font-bold">
+        <Link href="/" className="text-3xl font-bold">
           <Image
             width={100}
             height={40}
@@ -19,7 +19,7 @@ export default function Header() {
             alt="LWS Kitchen"
             className="h-10"
           />
-        </a>
+        </Link>
         <ul className="hidden md:flex space-x-6">
           <li>
             <Link

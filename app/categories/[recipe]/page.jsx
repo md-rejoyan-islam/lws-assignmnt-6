@@ -5,14 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-export default function Recipe() {
+export default function RecipeDetailsPgae() {
   const { recipe } = useParams();
 
-  const categoryData = categories.find((item) => item?.name === recipe);
-
-  const categoriesRecipes = categoryData
-    ? recipes.filter((item) => item?.category_id === categoryData?.id)
-    : [];
+  const categoryData = categories?.find(
+    (category) => (category.name = decodeURIComponent(recipe))
+  );
+  const categoriesRecipes = recipes?.filter(
+    (recipe) => recipe.category_id === categoryData.id
+  );
 
   return (
     <main className="container mx-auto px-4 py-8 mt-[100px]">
